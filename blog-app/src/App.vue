@@ -14,9 +14,9 @@ export default {
       mouseX: 0,
       mouseY: 0,
       red: 0,
-      green: 200,
+      green: 170,
       blue: 0,
-      rgb: "",
+      rgb: "rgb(200,200,200)",
       postInfo: [
         {
           id: 1,
@@ -116,6 +116,7 @@ export default {
       @mouseenter="(event) => mouseEnter(event)"
       @mousemove="(event) => mouseMove(event)"
       @mouseleave="(event) => mouseLeave(event)"
+      :style="{ boxShadow: `0 0 5px 4px ${this.rgb}` }"
     >
       <h1>hey! i'm michael ge.</h1>
       <p>
@@ -172,7 +173,6 @@ main {
   padding: 4vh 0;
   margin: 0 2vw;
   border-radius: 40px;
-  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.2);
 
   &:hover {
     animation-name: borderRadiusBounce;
@@ -182,11 +182,11 @@ main {
 
   @keyframes borderRadiusBounce {
     20% {
-      border-radius: 37px;
+      border-radius: 36px;
     }
 
     50% {
-      border-radius: 42px;
+      border-radius: 43px;
     }
 
     70% {
