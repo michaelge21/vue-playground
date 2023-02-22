@@ -90,7 +90,6 @@ export default {
 
     convertToRGB() {
       this.red = this.convertToRed();
-      // this.green = this.convertToGreen();
       this.blue = this.convertToBlue();
 
       let l1 = 0.2126 * this.red + 0.7152 * this.green + 0.0722 * this.blue;
@@ -118,7 +117,7 @@ export default {
       @mouseleave="(event) => mouseLeave(event)"
       :style="{ boxShadow: `0 0 5px 4px ${this.rgb}` }"
     >
-      <h1>hey! i'm michael ge.</h1>
+      <h1>on a journey to define social impact.</h1>
       <p>
         <span :style="{ color: `rgb(${this.red},${this.green},0)` }"
           >i make websites.</span
@@ -128,9 +127,6 @@ export default {
         >
       </p>
       <p :style="{ color: rgb }">i mix the two whenever i can.</p>
-      <!-- <p>the x position is: {{ mouseX }}</p>
-      <p>the Y position is: {{ mouseY }}</p>
-      <p>the rgb is: {{ rgb }}</p> -->
     </section>
 
     <section class="blogIntro">
@@ -170,9 +166,10 @@ main {
 }
 
 .hero {
-  padding: 4vh 0;
+  padding: 7vh 0;
   margin: 0 2vw;
   border-radius: 40px;
+  transition: all 0.15s;
 
   &:hover {
     animation-name: borderRadiusBounce;
