@@ -23,7 +23,7 @@ export default {
 <style scoped>
 article {
   position: relative;
-  background-color: rgba(238, 238, 238, 0.603);
+  background: hsl(207, 30%, 90%);
 }
 
 article img {
