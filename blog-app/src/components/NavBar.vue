@@ -1,7 +1,9 @@
 <template>
   <ul>
     <li></li>
-    <li>Portfolio</li>
+    <li>
+      <a href="src/pages/portfolio/index.html" target="_blank">Portfolio</a>
+    </li>
     <li>About</li>
     <li>Resume</li>
     <li>Contact</li>
