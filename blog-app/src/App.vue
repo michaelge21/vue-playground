@@ -8,8 +8,15 @@ export default {
     NavBar,
     BlogOutline,
   },
+
   data() {
     return {
+      mouseX: 0,
+      mouseY: 0,
+      red: 0,
+      green: 0,
+      blue: 0,
+      rgb: "",
       postInfo: [
         {
           id: 1,
@@ -47,15 +54,54 @@ export default {
       ],
     };
   },
+  methods: {
+    mouseEnter(event) {
+      this.mouseX = event.pageX;
+      this.mouseY = event.pageY;
+      this.convertToRGB();
+    },
+    mouseMove(event) {
+      this.mouseX = event.pageX;
+      this.mouseY = event.pageY;
+      this.convertToRGB();
+    },
+    mouseLeave(event) {
+      this.mouseX = event.pageX;
+      this.mouseY = event.pageY;
+      this.convertToRGB();
+    },
+
+    convertToRGB() {
+      this.red = Math.round((this.mouseX / window.innerWidth) * 255);
+
+      this.green = Math.round((this.mouseX / window.innerWidth) * 255);
+
+      this.blue = Math.round((this.mouseY / window.innerWidth) * 255);
+
+      console.log(
+        "rgb(" + this.red + ", " + this.green + ", " + this.blue + ")"
+      );
+      this.rgb = "rgb(" + this.red + ", " + this.green + ", " + this.blue + ")";
+    },
+  },
 };
 </script>
 
 <template>
   <header><NavBar></NavBar></header>
   <main>
-    <h1>hey! i'm michael ge.</h1>
-    <p><span>i make websites.</span> i build orgs.</p>
-    <p>i mix the two whenever i can.</p>
+    <section
+      @mouseenter="(event) => mouseEnter(event)"
+      @mousemove="(event) => mouseMove(event)"
+      @mouseleave="(event) => mouseLeave(event)"
+    >
+      <h1>hey! i'm michael ge.</h1>
+      <p><span>i make websites.</span> i build orgs.</p>
+      <p>i mix the two whenever i can.</p>
+      <p>the x position is: {{ mouseX }}</p>
+      <p>the Y position is: {{ mouseY }}</p>
+      <p :style="{ color: rgb }">the rgb is: {{ rgb }}</p>
+    </section>
 
     <section class="blogIntro">
       <h2>i write whenever i'm not dancing or coding!</h2>
@@ -66,16 +112,6 @@ export default {
     </section>
 
     <section class="blogContainer">
-      <!-- <div>
-        <BlogPost title="testing" desc="description"></BlogPost>
-      </div>
-      <div>
-        <BlogPost
-          title="testing a second"
-          desc="another description"
-        ></BlogPost>
-      </div> -->
-
       <BlogOutline
         v-for="post in postInfo"
         :key="post.id"
@@ -88,7 +124,7 @@ export default {
   </main>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 main {
   margin-top: 10vh;
   text-align: center;
@@ -110,6 +146,12 @@ h1 + p span {
 }
 h1 + p + p {
   color: rgb(0, 128, 0);
+
+  // color: rgb(255, 0, 0);
+  // color: rgb(255, 255, 0);
+  // color: rgb(255, 165, 0);
+
+  // color: rgb(0, 0, 255);
 }
 
 main > .blogIntro {
