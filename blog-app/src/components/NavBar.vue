@@ -25,7 +25,7 @@ ul {
 
 li:first-child {
   margin-right: auto;
-  background-image: url("../assets/betterMichaelReducedSize.jpg");
+  background-image: url("../assets/betterMichaelReducedSize.png");
   background-repeat: no-repeat;
   background-size: contain;
   width: 100px;

@@ -24,6 +24,7 @@ export default {
 article {
   position: relative;
   background: hsl(207, 30%, 90%);
+  color: #333333;
 }
 
 article img {
