@@ -14,7 +14,7 @@ export default {
       mouseX: 0,
       mouseY: 0,
       red: 0,
-      green: 0,
+      green: 200,
       blue: 0,
       rgb: "",
       postInfo: [
@@ -71,16 +71,37 @@ export default {
       this.convertToRGB();
     },
 
-    convertToRGB() {
+    convertToRed() {
       this.red = Math.round((this.mouseX / window.innerWidth) * 255);
+      return this.red;
+    },
 
-      this.green = Math.round((this.mouseX / window.innerWidth) * 255);
+    convertToGreen() {
+      this.green = Math.round((this.mouseY / window.innerHeight) * 255);
+      return this.green;
+    },
 
-      this.blue = Math.round((this.mouseY / window.innerWidth) * 255);
-
-      console.log(
-        "rgb(" + this.red + ", " + this.green + ", " + this.blue + ")"
+    convertToBlue() {
+      this.blue = Math.round(
+        ((this.mouseY + this.mouseX) / window.innerWidth) * 255
       );
+      return this.blue;
+    },
+
+    convertToRGB() {
+      this.red = this.convertToRed();
+      // this.green = this.convertToGreen();
+      this.blue = this.convertToBlue();
+
+      let l1 = 0.2126 * this.red + 0.7152 * this.green + 0.0722 * this.blue;
+      let l2 = 1;
+      let ratio = (l1 + 0.05) / (l2 + 0.05);
+      if (ratio < 4.5) {
+        this.blue = Math.round(
+          (4.5 * (l2 + 0.05) - 0.05 - 0.2126 * this.red - 0.0722 * this.green) /
+            0.7152
+        );
+      }
       this.rgb = "rgb(" + this.red + ", " + this.green + ", " + this.blue + ")";
     },
   },
@@ -91,16 +112,24 @@ export default {
   <header><NavBar></NavBar></header>
   <main>
     <section
+      class="hero"
       @mouseenter="(event) => mouseEnter(event)"
       @mousemove="(event) => mouseMove(event)"
       @mouseleave="(event) => mouseLeave(event)"
     >
       <h1>hey! i'm michael ge.</h1>
-      <p><span>i make websites.</span> i build orgs.</p>
-      <p>i mix the two whenever i can.</p>
-      <p>the x position is: {{ mouseX }}</p>
+      <p>
+        <span :style="{ color: `rgb(${this.red},${this.green},0)` }"
+          >i make websites.</span
+        >
+        <span :style="{ color: `rgb(0,${this.green},${this.blue})` }">
+          i build orgs.</span
+        >
+      </p>
+      <p :style="{ color: rgb }">i mix the two whenever i can.</p>
+      <!-- <p>the x position is: {{ mouseX }}</p>
       <p>the Y position is: {{ mouseY }}</p>
-      <p :style="{ color: rgb }">the rgb is: {{ rgb }}</p>
+      <p>the rgb is: {{ rgb }}</p> -->
     </section>
 
     <section class="blogIntro">
@@ -129,29 +158,47 @@ main {
   margin-top: 10vh;
   text-align: center;
 }
-main > h1 {
+.hero > h1 {
   font-size: calc(1.2vh + 1.2vw + 1rem);
 }
-main > p {
+.hero > p {
   font-size: calc(0.8vh + 0.8vw + 0.5rem);
   font-weight: 500;
 
   margin: 2vh 0;
 }
-h1 + p {
-  color: rgb(0, 0, 255);
-}
-h1 + p span {
-  color: rgb(255, 255, 0);
-}
-h1 + p + p {
-  color: rgb(0, 128, 0);
 
-  // color: rgb(255, 0, 0);
-  // color: rgb(255, 255, 0);
-  // color: rgb(255, 165, 0);
+.hero {
+  padding: 4vh 0;
+  margin: 0 2vw;
+  border-radius: 40px;
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.2);
 
-  // color: rgb(0, 0, 255);
+  &:hover {
+    animation-name: borderRadiusBounce;
+    animation-duration: 0.4s;
+    animation-timing-function: ease-in-out;
+  }
+
+  @keyframes borderRadiusBounce {
+    20% {
+      border-radius: 37px;
+    }
+
+    50% {
+      border-radius: 42px;
+    }
+
+    70% {
+      border-radius: 39px;
+    }
+    90% {
+      border-radius: 41px;
+    }
+    100% {
+      border-radius: 40px;
+    }
+  }
 }
 
 main > .blogIntro {
