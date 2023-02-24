@@ -37,7 +37,6 @@ export default {
 <style lang="scss" scoped>
 main {
   section {
-    max-width: 1024px;
     background-color: #222222;
     color: white;
     padding: 5vw;
@@ -48,11 +47,10 @@ main {
     justify-content: space-around;
 
     section {
-      flex-basis: 300px;
+      flex: 1 500px;
 
       display: flex;
       place-items: center;
-      gap: 20px;
     }
   }
 }

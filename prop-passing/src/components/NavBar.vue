@@ -2,15 +2,15 @@
   <nav>
     <ul>
       <li>
-        <a href="#" :class="{ disableClick: this.disableLink === 1 }">link</a>
+        <a href="#" :class="{ disableClick: this.disableLink == 1 }">link</a>
       </li>
       <li>
-        <a href="#" :class="{ disableClick: this.disableLink === 2 }"
+        <a href="#" :class="{ disableClick: this.disableLink == 2 }"
           >2nd link</a
         >
       </li>
       <li>
-        <a href="#" :class="{ disableClick: this.disableLink === 3 }"
+        <a href="#" :class="{ disableClick: this.disableLink == 3 }"
           >3rd link</a
         >
       </li>
@@ -22,7 +22,9 @@
 export default {
   name: "NavBar",
   data() {
-    return {};
+    return {
+      //   disableLink: "bruh",
+    };
   },
   props: {
     disableLink: {
@@ -46,6 +48,7 @@ ul {
   li {
     a {
       text-decoration: overline;
+      text-decoration-thickness: 2px;
     }
     a.disableClick {
       pointer-events: none;
